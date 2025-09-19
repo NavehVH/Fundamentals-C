@@ -1,19 +1,29 @@
-CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude
+CC = gcc
+CXX = g++
+CFLAGS = -Wall -Wextra -std=c11 -Iinclude
+CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 
-# grab all cpp files in root and src/structures
-SRC := $(wildcard *.cpp) $(wildcard src/structures/*.cpp)
-OBJ := $(SRC:.cpp=.o)
-TARGET := program
+# C and C++ sources
+C_SRC = $(wildcard src/c_code/*.c)
+C_OBJ = $(C_SRC:.c=.o)
 
-all: $(TARGET)
+CPP_SRC = $(wildcard *.cpp src/structures/*.cpp)
+CPP_OBJ = $(CPP_SRC:.cpp=.o)
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+# targets
+all: program_c program_cpp
 
-# works for files in subdirs too
+program_c: $(C_OBJ)
+	$(CC) $(CFLAGS) -o $@ $(C_OBJ)
+
+program_cpp: $(CPP_OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(CPP_OBJ)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(C_OBJ) $(CPP_OBJ) program_c program_cpp
