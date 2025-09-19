@@ -1,17 +1,19 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -Iinclude
+CXX := g++
+CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude
 
-SRC = main.c src/structures/my_stack.c
-OBJ = $(SRC:.c=.o)
-TARGET = program
+# grab all cpp files in root and src/structures
+SRC := $(wildcard *.cpp) $(wildcard src/structures/*.cpp)
+OBJ := $(SRC:.cpp=.o)
+TARGET := program
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# works for files in subdirs too
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(TARGET)
