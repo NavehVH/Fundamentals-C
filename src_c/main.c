@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include "peterson_lock.h"
 
 int main(void) {
-    printf("Hello, World!\n");
-    return 0;
+    return peterson_demo();
 }

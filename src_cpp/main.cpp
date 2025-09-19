@@ -1,6 +1,6 @@
 #include <iostream>
-#include "MyListNode.h"
-#include "MyStack.h"
+#include "include/MyListNode.h"
+#include "include/MyStack.h"
 using namespace std;
 
 int main() {
