@@ -14,7 +14,7 @@ CXXFLAGS += $(addprefix -I,$(CPP_INC_DIRS))
 C_SRC   = $(wildcard src_c/*.c)
 C_OBJ   = $(C_SRC:.c=.o)
 
-CPP_SRC = $(wildcard src_cpp/*.cpp src_cpp/structures/*.cpp)
+CPP_SRC = $(wildcard src_cpp/*.cpp src_cpp/structures/*.cpp src_cpp/algorithms/*.cpp)
 CPP_OBJ = $(CPP_SRC:.cpp=.o)
 
 all: program_c program_cpp
